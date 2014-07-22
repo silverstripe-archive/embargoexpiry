@@ -1,10 +1,10 @@
 <?php
 /**
- * A queued job that publishes a target after a delay.
+ * A queued job that publishes or unpublishes a target at a set date-time
  *
  * @package embargoexpiry
  */
-class PublishTargetJob extends AbstractQueuedJob {
+class WorkflowPublishTargetJob extends AbstractQueuedJob {
 
 	public function __construct($obj = null, $type = null) {
 		if ($obj) {
@@ -15,7 +15,7 @@ class PublishTargetJob extends AbstractQueuedJob {
 	}
 
 	public function getTitle() {
-		return _t('PublishTargetJob.SCHEDULEJOBTITLE', "Scheduled $this->publishType of " . $this->getObject()->Title);
+		return _t('WorkflowPublishTargetJob.SCHEDULEJOBTITLE', "Scheduled $this->publishType of " . $this->getObject()->Title);
 	}
 
 	public function process() {

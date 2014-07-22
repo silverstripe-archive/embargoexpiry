@@ -6,13 +6,13 @@
  * @author marcus@silverstripe.com.au
  * @license BSD License http://silverstripe.org/bsd-license/
  */
-class EmbargoExpiryExtension extends DataExtension {
+class WorkflowEmbargoExpiryExtension extends DataExtension {
 
 	private static $db = array(
 		'DesiredPublishDate'	=> 'SS_Datetime',
 		'DesiredUnPublishDate'	=> 'SS_Datetime',
 		'PublishOnDate'			=> 'SS_Datetime',
-		'UnPublishOnDate'		=> 'SS_Datetime',
+		'UnPublishOnDate'		=> 'SS_Datetime'
 	);
 
 	private static $has_one = array(
@@ -26,6 +26,11 @@ class EmbargoExpiryExtension extends DataExtension {
 
 	// This "config" option, might better be handled in _config
 	public static $showTimePicker = true;
+
+	/**
+	 * @var Is a {@link WorkflowPublishTargetJob} currently running?
+	 */
+	private $isPublishJobRunning = false;
 
 	/**
 	 * @var WorkflowService
@@ -285,4 +290,13 @@ class EmbargoExpiryExtension extends DataExtension {
 	public function getIsWorkflowInEffect() {
 		return $this->isWorkflowInEffect;
 	}
+
+	public function setIsPublishJobRunning($isPublishJobRunning) {
+		$this->isPublishJobRunning = $isPublishJobRunning;
+	}
+
+	public function getIsPublishJobRunning() {
+		return $this->isPublishJobRunning = $isPublishJobRunning;
+	}
+
 }

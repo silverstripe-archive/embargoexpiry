@@ -12,6 +12,10 @@
 		{
 			"name": "Andrew Short",
 			"email": "andrewjshort@gmail.com"
+		},
+		{
+			"name": "Michael Parkhill",
+			"email": "mike@silverstripe.com"
 		}
 	],
 	"require":
