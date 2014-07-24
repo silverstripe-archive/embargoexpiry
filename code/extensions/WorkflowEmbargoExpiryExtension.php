@@ -58,12 +58,10 @@ class WorkflowEmbargoExpiryExtension extends DataExtension {
 	 */
 	public function updateCMSFields(FieldList $fields) {
 
-		// Add timepicker functionality
-		// @see https://github.com/trentrichardson/jQuery-Timepicker-Addon
-		Requirements::css(ADVANCED_WORKFLOW_DIR . '/thirdparty/javascript/jquery-ui/timepicker/jquery-ui-timepicker-addon.css');
+		// Add timepicker functionality {@see https://github.com/trentrichardson/jQuery-Timepicker-Addon}
+		Requirements::css(ADVANCED_WORKFLOW_DIR . '/thirdparty/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.css');
 		Requirements::css(ADVANCED_WORKFLOW_DIR . '/css/WorkflowCMS.css');
-		Requirements::javascript(ADVANCED_WORKFLOW_DIR . '/thirdparty/javascript/jquery-ui/timepicker/jquery-ui-sliderAccess.js');
-		Requirements::javascript(ADVANCED_WORKFLOW_DIR . '/thirdparty/javascript/jquery-ui/timepicker/jquery-ui-timepicker-addon.js');
+		Requirements::javascript(ADVANCED_WORKFLOW_DIR . '/thirdparty/jquery-ui-timepicker/jquery-ui-timepicker-addon.min.js');
 		Requirements::javascript(ADVANCED_WORKFLOW_DIR . '/javascript/WorkflowField.js');
 
 		$this->setIsWorkflowInEffect();
@@ -92,8 +90,8 @@ class WorkflowEmbargoExpiryExtension extends DataExtension {
 
 		$dt->getDateField()->setConfig('showcalendar', true);
 		$ut->getDateField()->setConfig('showcalendar', true);
-		$dt->getTimeField()->setConfig('timeformat', 'HH:mm:ss');
-		$ut->getTimeField()->setConfig('timeformat', 'HH:mm:ss');
+		$dt->getTimeField()->setConfig('timeformat', 'HH:mm');
+		$ut->getTimeField()->setConfig('timeformat', 'HH:mm');
 
 		// Enable a jQuery-UI timepicker widget
 		if(self::$showTimePicker) {
@@ -191,6 +189,7 @@ class WorkflowEmbargoExpiryExtension extends DataExtension {
 		if(!$this->getIsWorkflowInEffect()) {
 			$parts['PublishDateIntro']['BULLET_1'] = false;
 		}
+
 		return $parts[$key];
 	}
 
@@ -287,16 +286,29 @@ class WorkflowEmbargoExpiryExtension extends DataExtension {
 		$this->isWorkflowInEffect = $effective?true:false;
 	}
 
+	/**
+	 * Check if a workflow is in effect
+	 *
+	 * @todo check this is relevant in this embargoexpiry only version of advanced workflow
+	 * @return boolean
+	 */
 	public function getIsWorkflowInEffect() {
 		return $this->isWorkflowInEffect;
 	}
 
+	/**
+	 * This is set to true when {@link ProcessJobQueueTask} is running
+	 *
+	 * @param boolean $isPublishJobRunning
+	 */
 	public function setIsPublishJobRunning($isPublishJobRunning) {
 		$this->isPublishJobRunning = $isPublishJobRunning;
 	}
 
+	/**
+	 * @return boolean Is there a publish job currently running {@link ProcessJobQueueTask}
+	 */
 	public function getIsPublishJobRunning() {
 		return $this->isPublishJobRunning = $isPublishJobRunning;
 	}
-
 }
