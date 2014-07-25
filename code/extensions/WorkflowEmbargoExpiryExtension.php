@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Adds embargo period and expiry dates to content items
  *
@@ -100,6 +99,12 @@ class WorkflowEmbargoExpiryExtension extends DataExtension {
 		}
 	}
 
+	/**
+	 * Event handler called before writing to the database, overloaded from parent
+	 * to manage the PublishJob properties of the owner item.
+	 *
+	 * @uses DataObject->onBeforeWrite()
+	 */
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 

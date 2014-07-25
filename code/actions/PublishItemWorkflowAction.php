@@ -4,17 +4,24 @@
  *
  * @author     marcus@silverstripe.com.au
  * @license    BSD License (http://silverstripe.org/bsd-license/)
- * @package    advancedworkflow
+ * @package    embargoexpiry
  * @subpackage actions
  */
 class PublishItemWorkflowAction extends WorkflowAction {
 
+	/**
+	 * @var array $db
+	 */
 	private static $db = array(
 		'PublishDelay' => 'Int'
 	);
 
-	public static $icon = 'embargoexpiry/images/publish.png';
-
+	/**
+	 * Executes the workflow action instance by creating publish or unpublish queued jobs
+	 *
+	 * @todo remove DesiredPublishDate and DesiredUnpublishDate features as they are not used
+	 * @param WorkflowInstance $workflow
+	 */
 	public function execute(WorkflowInstance $workflow) {
 		if (!$target = $workflow->getTarget()) {
 			return true;
@@ -45,6 +52,9 @@ class PublishItemWorkflowAction extends WorkflowAction {
 		return true;
 	}
 
+	/**
+	 * @return FieldList Returns a TabSet for usage within the CMS
+	 */
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 
@@ -72,5 +82,4 @@ class PublishItemWorkflowAction extends WorkflowAction {
 	public function canPublishTarget(DataObject $target) {
 		return true;
 	}
-
 }
