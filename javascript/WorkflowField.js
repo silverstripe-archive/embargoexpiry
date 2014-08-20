@@ -25,6 +25,7 @@ jQuery.entwine("workflow", function($) {
 			field.timepicker(pickerOpts);
 			return false;
 		},
+
 		onmatch: function(){
 			var self = this,
 				publishDate = this.find('#PublishOnDate input.date'),
@@ -61,50 +62,16 @@ jQuery.entwine("workflow", function($) {
 			 * There may not be $(#PublishOnXXX input.date) DOM objects = undefined.
 			 * There may be $(#PublishOnXXX input.date) DOM objects = val() method may return zero-length.
 			 */
-			var noPublishDate = (publishDate === undefined || publishDate.length == 0);
-			var noPublishTime = (publishTime === undefined || publishTime.length == 0);
+			var noPublishDate = (publishDate === undefined || publishDate.length == 0),
+				noPublishTime = (publishTime === undefined || publishTime.length == 0);
 
 			if(noPublishDate && noPublishTime){
 				//No Embargo, remove customizations
 				$('#Form_EditForm_action_publish').removeClass('embargo');
 				$('#Form_EditForm_action_publish').prev('button').removeClass('ui-corner-right');
 			} else {
-
-				var link,
-					message;
-
 				$('#Form_EditForm_action_publish').addClass('embargo');
 				$('#Form_EditForm_action_publish').prev('button').addClass('ui-corner-right');
-
-				if(publishDate === ''){
-					//Has time, not date
-					message = ss.i18n.sprintf(
-						ss.i18n._t('Workflow.EMBARGOMESSAGETIME'),
-						publishTime
-					);
-
-				}else if(publishTime === ''){
-					//has date no time
-					message = ss.i18n.sprintf(
-						ss.i18n._t('Workflow.EMBARGOMESSAGEDATE'),
-						publishDate
-					);
-				}else{
-					//has date and time
-					message = ss.i18n.sprintf(
-						ss.i18n._t('Workflow.EMBARGOMESSAGEDATETIME'),
-						publishDate,
-						publishTime
-					);
-				}
-
-				message = message.replace('<a>','<a href="#" id="workflow-schedule">');
-
-				//Append message with link
-				$('.Actions #ActionMenus').after('<p class="edit-info" id="embargo-message">' + message + '</p>');
-
-				//Active link
-				this.linkScheduled(parent);
 			}
 
 			return false;
