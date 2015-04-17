@@ -91,28 +91,4 @@ class WorkflowEmbargoExpiryTest extends SapphireTest {
 		$this->assertTrue($page->PublishJobID > 0);
 		$this->assertTrue($page->UnPublishJobID > 0);
 	}
-
-	protected function createDefinition() {
-		$definition = new WorkflowDefinition();
-		$definition->Title = "Dummy Workflow Definition";
-		$definition->write();
-
-		$stepOne = new WorkflowAction();
-		$stepOne->Title = "Step One";
-		$stepOne->WorkflowDefID = $definition->ID;
-		$stepOne->write();
-
-		$stepTwo = new WorkflowAction();
-		$stepTwo->Title = "Step Two";
-		$stepTwo->WorkflowDefID = $definition->ID;
-		$stepTwo->write();
-
-		$transitionOne = new WorkflowTransition();
-		$transitionOne->Title = 'Step One T1';
-		$transitionOne->ActionID = $stepOne->ID;
-		$transitionOne->NextActionID = $stepTwo->ID;
-		$transitionOne->write();
-
-		return $definition;
-	}
 }
