@@ -7,12 +7,15 @@
 class WorkflowEmbargoExpiryTest extends SapphireTest {
 
 	/**
+	 * A list of extensions that must be applied during the execution of this run.  If they are
+	 * not applied, they will be temporarily added and a database migration called.
+	 *
 	 * @var array
 	 */
 	protected $requiredExtensions = array(
 		'SiteTree' => array(
-			'EmbargoExpiryExtension',
 			'Versioned',
+			'WorkflowEmbargoExpiryExtension',
 		)
 	);
 
@@ -21,7 +24,7 @@ class WorkflowEmbargoExpiryTest extends SapphireTest {
 	 */
 	protected $illegalExtensions = array(
 		'SiteTree' => array(
-			"Translatable",
+			'Translatable',
 		)
 	);
 

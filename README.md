@@ -22,10 +22,10 @@ Expiry - a date-time on which to unpublish some content changes.
 
 Add `- WorkflowEmbargoExpiryExtension` extension to your mysite/_config.yml file.
 
-	:::yml
-	SiteTree:
-	    extensions:
-	        - WorkflowEmbargoExpiryExtension
+:::yml
+SiteTree:
+    extensions:
+        - WorkflowEmbargoExpiryExtension
 
 Ensure the [QueuedJobs](https://github.com/nyeholt/silverstripe-queuedjobs)
 module is installed and configured correctly.
