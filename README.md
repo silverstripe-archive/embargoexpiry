@@ -1,4 +1,4 @@
-# Embargo Expiry Module
+# SilverStripe Embargo-Expiry Module
 
 This is stripped down version of the AdvancedWorkflow module. It only includes the embargo-expiry features, all other features have been removed from the original code. 
 
@@ -20,7 +20,17 @@ Expiry - a date-time on which to unpublish some content changes.
 
 ## Installation
 
-Add `- WorkflowEmbargoExpiryExtension` extension to your mysite/_config.yml file.
+Install with composer
+```sh
+composer require silverstripe/embargoexpiry
+```
+
+Then run a dev/build to rebuild your database and class cache
+```sh
+./framework/sake dev/build flush=all
+```
+
+Add WorkflowEmbargoExpiryExtension as a SiteTree extension, in your mysite/_config.yml file.
 
 ```yml
 SiteTree:
