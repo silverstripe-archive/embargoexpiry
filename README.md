@@ -22,13 +22,18 @@ Expiry - a date-time on which to unpublish some content changes.
 
 Add `- WorkflowEmbargoExpiryExtension` extension to your mysite/_config.yml file.
 
-:::yml
+```yml
 SiteTree:
     extensions:
         - WorkflowEmbargoExpiryExtension
+```
 
 Ensure the [QueuedJobs](https://github.com/nyeholt/silverstripe-queuedjobs)
 module is installed and configured correctly.
-You should have a cronjob similar to the following in place, running as the webserver user.
+You should have a cronjob similar to the following in place, running as the webserver user. 
 
-	*/1 * * * * cd  && sudo -u www php /sites/default/www/framework/cli-script.php dev/tasks/ProcessJobQueueTask
+```sh
+*/1 * * * * cd  && sudo -u www php /sites/default/www/framework/cli-script.php dev/tasks/ProcessJobQueueTask
+```
+
+Note: you'll need to update the path to cli-script.php to reference your own environment.
