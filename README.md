@@ -1,5 +1,7 @@
 # SilverStripe Embargo-Expiry Module
 
+**THIS MODULE HAS BEEN REPLACED WITH [https://github.com/silverstripe-terraformers/silverstripe-embargo-expiry](https://github.com/silverstripe-terraformers/silverstripe-embargo-expiry))**
+
 This is stripped down version of the AdvancedWorkflow module. It only includes the embargo-expiry features, all other features have been removed from the original code. 
 
 Note: This is not compatible with the AdvancedWorkflow module!
